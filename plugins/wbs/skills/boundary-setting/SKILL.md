@@ -99,7 +99,9 @@ Rules:
 - Group related points. One point per decision, not one per feature. For example, all questions about who can do what are one point, owned by the roles feature.
 - Quality over count. Do not list a point that no feature needs. Do not list obvious technical detail as Tier C. List a Tier C point only if you would otherwise have written it in the cell.
 - More than about ten Tier A points in one module usually means the tiering is too strict. Re-check each against the test and group related ones before returning.
-- Parked or excluded items: if no accepted requirement asks for the point, it is Tier B with the recommended treatment Parked or Excluded. If an accepted requirement implies it, the treatment would narrow the requirement, so it is Tier A.
+- Parked or excluded items: if no accepted requirement mentions the point, it is Tier B with the recommended treatment Parked or Excluded. It is Tier A when the point is a normal part of the capability an accepted requirement describes, so that a reader of the requirement would expect it. Excluding it would narrow the requirement. Test: would a reader of the requirement be surprised to find this left out?
+- Data kept: a default of "records are kept and there is no deletion function" is Tier B. A stated retention period, an archive or a deletion function is Tier A.
+- The status follows the tier, not the treatment. A Tier B point proposed as Parked or Excluded has status Proposed default.
 - The Parked list entry and its PK ID are created when the row is Decided as Parked, by the Writer. The scan does not create Parked entries.
 - The user may apply an earlier decision to a type of point. The Orchestrator records it in the register under Precedents. Later points of the same type are decided by precedent and reported in the review summary.
 - A point found late (by a reviewer or the Writer, after the first scan) becomes a Decisions row with status Pending decision if it is Tier A, or Proposed default if it is Tier B. A Tier A behaviour is not drafted until the user decides. Late points are raised at the next module review, not as a separate interruption.

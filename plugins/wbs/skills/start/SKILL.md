@@ -65,7 +65,7 @@ In both modes:
 
 ### Stage 2: Blueprint and assumption sweep
 13. Brief the WBS Architect to fill the blueprint template (`templates/wbs-blueprint-template.md`).
-14. **Assumption sweep.** Brief the WBS Writer in Scan mode for every module, in parallel. Each writes `_work/scan-<module>.md`. Merge the rows into the Decisions table of the register, assign the `AS-nnn` IDs in sequence, and apply Precedents: a point covered by a precedent becomes Decided and is reported, not asked. If a Writer reports a blueprint gap (a requirement in no feature, or a wrong mapping), brief the WBS Architect to correct the blueprint before the decision sheet is shown.
+14. **Assumption sweep.** Brief the WBS Writer in Scan mode for every module, in parallel. Each writes `_work/scan-<module-slug>.md`. The module slug is the module name in lower case with hyphens, the same name as the file in `wbs/`. Merge the rows into the Decisions table of the register, assign the `AS-nnn` IDs in sequence, and apply Precedents: a point covered by a precedent becomes Decided and is reported, not asked. If a Writer reports a blueprint gap (a requirement in no feature, or a wrong mapping), brief the WBS Architect to correct the blueprint before the decision sheet is shown.
 15. **Blueprint and decision sheet (G3).** Present the blueprint summary (modules, number of features, coverage, open structural points) and one decision sheet for all modules, by tier:
     - Tier A: each point as a question with options and a recommendation.
     - Tier B (status Proposed default): one compact table. Ask one question: **Accept all recommended** (recommended), **Accept all except the ones I list**, or **Show each item**. Accepted rows become Decided.
