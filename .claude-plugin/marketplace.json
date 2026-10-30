@@ -1,0 +1,14 @@
+{
+  "name": "wbs-agents",
+  "owner": {
+    "name": "WBS Agents"
+  },
+  "plugins": [
+    {
+      "name": "wbs",
+      "source": "./plugins/wbs",
+      "description": "Guided WBS documentation workflow with specialist review agents and publishing to Google Sheets."
+    }
+  ],
+  "description": "Guided WBS documentation workflow with specialist review agents."
+}

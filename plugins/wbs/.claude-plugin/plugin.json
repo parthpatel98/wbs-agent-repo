@@ -1,0 +1,6 @@
+{
+  "name": "wbs",
+  "version": "0.1.0",
+  "description": "Guided, module-by-module WBS documentation. A team of agents reviews requirements, drafts each module in the fixed WBS format, reviews it as QA and Product Owner, and publishes approved modules to a Google Sheet.",
+  "keywords": ["wbs", "requirements", "documentation", "review"]
+}
