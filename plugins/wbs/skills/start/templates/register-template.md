@@ -27,10 +27,10 @@ One row for every assumption, exclusion, parked item and question. A point is re
 
 Tier A: needs the user's answer. Tier B: recommended default, accepted by group. Tier C: technical detail left to the development team, not shown for decision.
 
-Status: Pending decision (Tier A, needs an answer), Proposed default (Tier B, awaiting acceptance), Logged (Tier C), Decided. Before the decision, `Agent recommendation` holds the proposed treatment and a short reason, and `User decision` and `Resulting treatment` are empty. After the decision, `Resulting treatment` is one of: In scope, Assumed, Parked (with PK id), Excluded, Dropped, Left to development team. `Date` is the date of the last change.
+Status: Pending decision (Tier A, needs an answer), Proposed default (Tier B, awaiting acceptance), Logged (Tier C), Decided. Before the decision, `Agent recommendation` holds the proposed treatment and a short reason, and `User decision` and `Resulting treatment` are empty. After the decision, `Resulting treatment` is one of: In scope, Assumed, Parked (with PK id), Excluded, Dropped, Left to development team. `Basis` is set at the decision: Client source (the client's own material states it), Team decision (the user decided, no client evidence) or Needs client confirmation. `Applied in` is filled when a decision changed a requirement or the WBS: the requirement file and version, and the feature ID. `Date` is the date of the last change.
 
-| ID | Point | Source or reason | Feature ID | Module | Tier | Agent recommendation | User decision | Resulting treatment | Status | Date |
-|---|---|---|---|---|---|---|---|---|---|---|
+| ID | Point | Source or reason | Feature ID | Module | Tier | Agent recommendation | User decision | Resulting treatment | Basis | Applied in | Status | Date |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
 
 ## Precedents
 

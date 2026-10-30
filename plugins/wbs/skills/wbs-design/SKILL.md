@@ -41,6 +41,12 @@ Merge when:
 
 Use a sub-feature row (n.m.k) only when a feature has distinct parts that each need a row, and the parent row still introduces them. Do not use sub-features only to shorten a cell.
 
+## Level of detail
+Plan features at capability level. Do not make a stand-alone feature for a filter, a sort order, pagination, a button or a routine create, edit or delete variant that belongs to one capability. Describe them as bullets inside the feature. Split only for a different business goal, a different owner, a complex exception flow or an independent integration risk. Check both ways before the blueprint is shown: too many small features, and features so wide that a reviewer cannot check them in a few minutes.
+
+## Module risk
+Rate each module Low, Medium or High as the blueprint template describes. The rating decides whether the Product Owner review runs. It is a planning aid, not a finding.
+
 ## Naming
 - Short noun phrases: "Leave request", "Approval queue", "Email notifications".
 - Use the project glossary terms.

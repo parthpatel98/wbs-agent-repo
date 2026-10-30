@@ -36,11 +36,11 @@ Load each with the Skill tool before starting. Plugin skills are named `wbs:<ski
 9. Return the summary.
 
 ## Steps: Update
-1. Read `requirements/register.md`. Select answers and decisions not yet applied: answered clarification entries and suggestions marked Accept into scope.
+1. Read `requirements/register.md`. Select answers and decisions not yet applied: answered clarification entries, suggestions marked Accept into scope, and Decisions rows that are Decided with the treatment In scope and add or change a requirement. Mark such a requirement with the decision ID and its `Basis` (team decision unless the source is client material).
 2. For each, change the affected requirement: update the text or add a new requirement. The source is the register entry ID (for example `CL-004`, `SG-012`). A suggestion decided Assume, Park or Reject is not added as a requirement.
 3. Where an answer closes an `Unclear` point, set it to `Confirmed`.
 4. Where an answer creates or removes a module, update the module list in `baseline.md` and say so in the summary.
-5. Add a Change Log entry to each changed file and increase its version by 0.1.
+5. Add a Change Log entry to each changed file and increase its version by 0.1. Return the requirement file and version for each applied decision, so the Orchestrator can fill `Applied in`.
 6. Return the summary.
 
 ## Rules

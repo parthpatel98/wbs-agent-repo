@@ -93,15 +93,17 @@ Draft, In review, User review, Approved.
 
 ## 3. Module list
 
-| No. | Module | Audience | Purpose | Requirement IDs | Features | Order | Status |
-|---|---|---|---|---|---|---|---|
-| 1 | | | | | | 1 | Draft |
+| No. | Module | Audience | Purpose | Requirement IDs | Features | Order | Risk | Reviews | Status |
+|---|---|---|---|---|---|---|---|---|---|
+| 1 | | | | | | 1 | Medium | QA | Draft |
 
 Instruction:
 - One row per module. The purpose is one sentence.
 - The merged header row is built as `<n>. <Module name>`. Where the Audience column is filled, add `  |  <audience>` (two spaces around the bar), as in the reference. Fill Audience only where the module is meant for a defined group of users. Leave it empty otherwise. Do not type the bar character in this table.
 - Suggested order, following the reference pattern: features shared by all users first, then modules by role or functional area, then administration, then background processing and integrations. Change the order where dependencies require it and give the reason in section 8.
 - The order here is the order in which modules are drafted and reviewed.
+- Risk is Low, Medium or High. Rate it from: unclear or partly defined scope, integration or data migration, effects on other modules, new or AI-driven behaviour, and business criticality. High if two or more apply strongly. Add the reason in section 8 for each High.
+- Reviews is `QA` or `QA + PO`. Use `QA + PO` for High risk modules when `po_review` is `risk-based`, for every module when `all`, and `QA` only when `none`.
 
 ---
 

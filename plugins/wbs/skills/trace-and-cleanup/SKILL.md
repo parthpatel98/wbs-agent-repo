@@ -80,15 +80,16 @@ Done at the end (Stage 5), after publishing, and only with the user's approval.
 - `requirements/` (module requirement files, `baseline.md`, `register.md`).
 - `wbs/blueprint.md` and the approved module files.
 - `trace.md`.
+- `reviews/` and everything in it.
 
 ### Files that are removed
-- Everything in `_work/`: review files, simulated copies, old drafts, check output.
+- Everything in `_work/`: scan files, simulated copies, old drafts, check output.
 - Earlier versions of a file that was replaced.
 - Duplicates and scratch files that the agents created.
 
 ### Steps
 1. List the files in the project folder. Mark each as stay or remove, with a reason.
-2. Check that each file to be removed was created by an agent and its content is kept elsewhere. Review files are kept in the Review Log. Do not remove a file that has content found nowhere else.
+2. Check that each file to be removed was created by an agent and its content is kept elsewhere. Review files are kept in `reviews/`. Do not remove a file that has content found nowhere else.
 3. Show the user the remove list. Ask for approval.
 4. After approval, remove the files. Record the removal in `trace.md` Approvals, with the number of files removed.
 5. Confirm that the folder now holds only files that stay.

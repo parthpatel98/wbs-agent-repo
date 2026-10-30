@@ -45,9 +45,9 @@ In both modes:
 
 ### Setup (G1)
 1. Ask Round 1 with AskUserQuestion: material available (multi-select), where it is, whether a knowledge bank exists, kind of work.
-2. Ask Round 2 with AskUserQuestion: output destination, publish timing (after each module or at the end), which reviews apply (QA and Product Owner, Product Owner only, QA only), and approval mode (**balanced** recommended, or **each step**).
+2. Ask Round 2 with AskUserQuestion: output destination, publish timing (after each module or at the end), the Product Owner review (**high-risk modules only** recommended, **every module**, or **never**; the QA review always runs), and approval mode (**balanced** recommended, or **each step**). Record `po_review: risk-based | all | none` in `project-profile.md`.
 3. In plain text, ask for what cannot be selected: project name, client and delivery party names, user roles, legacy systems, terms with a fixed meaning, document language. Ask for the link to the reference WBS sheet if it has not been shared. The format is fixed and always follows it.
-4. Ask the user to confirm the project folder once (default: the current folder). Create the folder structure: `project-profile.md`, `status.md`, `inputs/`, `knowledge-bank/`, `requirements/`, `wbs/`, `templates/`, `trace.md`, `_work/`. Copy `${CLAUDE_SKILL_DIR}/templates/` into `templates/`. Create `requirements/register.md` from `templates/register-template.md` and `status.md` from `templates/status-template.md`.
+4. Ask the user to confirm the project folder once (default: the current folder). Create the folder structure: `project-profile.md`, `status.md`, `inputs/`, `knowledge-bank/`, `requirements/`, `wbs/`, `templates/`, `trace.md`, `_work/`, `reviews/`. Copy `${CLAUDE_SKILL_DIR}/templates/` into `templates/`. Create `requirements/register.md` from `templates/register-template.md` and `status.md` from `templates/status-template.md`.
 5. Copy every attachment and linked source into `inputs/`. List them in `project-profile.md`.
 6. Create a copy of the reference sheet for this project, using the Google Drive connector. Record its link in `project-profile.md`. If the connector is not available, record that, continue with markdown only, and tell the user.
 7. Create `trace.md` with the sections listed under "trace.md structure".
@@ -55,7 +55,7 @@ In both modes:
 
 ### Stage 1: Requirements
 9. Brief the Requirements Analyst (Intake) to read `inputs/` and write the module requirement files and the draft baseline.
-10. Brief the Advisor and the Completeness Reviewer, in parallel, on the module files. The Advisor writes to the register. The Completeness Reviewer writes to `_work/`.
+10. Brief the Advisor once on the module files in Combined mode: it applies the advisory checklist and the completeness rubric in one pass. It adds its findings to the register and writes the completeness findings to `reviews/requirements/round-<n>-combined.md`, under two headings (`## Advisor`, `## Completeness`). Brief the Completeness Reviewer as a separate agent only if the user asked for independent reviewers.
 11. **Decision sheet (G2).** Search the knowledge bank and inputs for answers to the gaps reported. Record the remaining gaps in `requirements/register.md` under Clarifications (`CL-001`, in sequence). Present one decision sheet, built as the question-writing skill describes:
     - Clarification questions, each with a recommended answer.
     - Advisor findings, High impact first, each with the options Accept into scope, Assume, Park, Reject and a recommendation. Low findings are grouped and accepted by group.
@@ -64,7 +64,7 @@ In both modes:
 12. Brief the Requirements Analyst (Update) to apply the answers and decisions. If modules changed, repeat step 10 for those modules only. Repeat up to two times without asking the user. Points still open are classified under the boundary rule, as Pending decision where they change scope. Then ask the user to approve the baseline and module list. Set `requirements/baseline.md` to approved, with the version and date.
 
 ### Stage 2: Blueprint and assumption sweep
-13. Brief the WBS Architect to fill the blueprint template (`templates/wbs-blueprint-template.md`).
+13. Brief the WBS Architect to fill the blueprint template (`templates/wbs-blueprint-template.md`). It also rates each module's risk and sets its reviews (see the wbs-design skill). Apply `po_review` from the profile: with `risk-based` the Product Owner reviews only High-risk modules, with `all` every module, with `none` no module. Show the ratings in the blueprint summary at G3. The user can change any of them.
 14. **Assumption sweep.** Brief the WBS Writer in Scan mode for every module, in parallel. Each writes `_work/scan-<module-slug>.md`. The module slug is the module name in lower case with hyphens, the same name as the file in `wbs/`. Merge the rows into the Decisions table of the register, assign the `AS-nnn` IDs in sequence, replace every `NEW-n` reference inside the rows with the matching AS ID, and apply Precedents: a point covered by a precedent becomes Decided and is reported, not asked. If a Writer reports a blueprint gap (a requirement in no feature, or a wrong mapping), brief the WBS Architect to correct the blueprint before the decision sheet is shown.
 15. **Blueprint and decision sheet (G3).** Present the blueprint summary (modules, number of features, coverage, open structural points) and one decision sheet for all modules, by tier:
     - Tier A: each point as a question with options and a recommendation.
@@ -74,10 +74,10 @@ In both modes:
 
 ### Stage 3: Module loop (one module at a time, in blueprint order)
 16. Brief the WBS Writer in Draft mode, with the path of the first approved module as the style reference once one exists. When it returns, set the module status to `in review`.
-17. Compute a checksum of the whole module file with Bash, or with a file-size and line-count record if no checksum tool is available. Brief the QA Reviewer and the Product Owner Reviewer, in parallel, for the review types chosen at setup. Each writes its review to its own file: `_work/<module>-r<n>-qa.md` and `_work/<module>-r<n>-po.md`.
-18. Compute the checksum again. If the module file changed, a reviewer broke its rule. Restore the previous version and report it to the user.
-19. Add the round to the module's Review Log: `### Round <n>` with `#### QA Review`, `#### Product Owner Review`, `#### Responses and Decisions` and `#### Review Summary`. Copy each reviewer's Verdict line, Mechanical check line and table under its own sub-heading without changing the content. Write "Not run" under a review that was not selected. Merge duplicate comments from the two reviewers in the summary, showing the higher severity.
-20. **Automatic correction.** If there are open comments with `Needs user decision` = No and severity Must fix or Should fix, brief the Writer in Correct mode, then the reviewers in re-check mode. Each lists status changes for its own comments in its `_work` file. Apply them in the Review Log. Allow at most two correction loops. Do not ask the user in between. Comments that need a decision become Pending decision rows (Tier A) and are not resolved.
+17. Compute a checksum of the whole module file with Bash, or with a file-size and line-count record if no checksum tool is available. Brief the QA Reviewer, and the Product Owner Reviewer too when the blueprint sets PO for this module, in parallel. When PO is not set, tell the QA Reviewer to apply the Product Owner lens as well. Each writes its review to its own persistent file: `reviews/<module-slug>/round-<n>-qa.md` and `reviews/<module-slug>/round-<n>-po.md`.
+18. Compute the checksum again. If the module file changed, a reviewer broke its rule. Restore the previous version and report it to the user. Check that every review file you asked for exists. If one is missing, the review is incomplete: run it again before step 19.
+19. Add the round to the module's Review Log: `### Round <n>` with `#### QA Review`, `#### Product Owner Review`, `#### Responses and Decisions` and `#### Review Summary`. Copy each reviewer's Verdict line, Mechanical check line and table under its own sub-heading without changing the content. Write "Not run (QA covered the product lens)" under a review that was not selected, and give the review file paths in the Review Log. Merge duplicate comments from the two reviewers in the summary, showing the higher severity.
+20. **Automatic correction.** If there are open comments with `Needs user decision` = No and severity Must fix or Should fix, brief the Writer in Correct mode, then re-check. Brief only the reviewers whose comments were changed, with the changed feature IDs and the comment numbers. Each appends the status changes for its own comments to its review file under `## Re-check`. Apply them in the Review Log. Run a full review again instead of a re-check if a correction changed a lifecycle, an integration, scope or permissions. A comment whose fix adds, removes or changes a business rule is always `Needs user decision` = Yes, whatever the reviewer wrote. Allow at most two correction loops. Do not ask the user in between. Comments that need a decision become Pending decision rows (Tier A) and are not resolved.
 21. **Module review (G4).** Set status to `user review`. Write the Review Summary under the round and present it:
     - File path, both verdicts, mechanical check result.
     - Comments by severity, and how many the Writer fixed without the user.
@@ -87,7 +87,7 @@ In both modes:
     - Precedents applied.
     - Three bullets taken at random from different features, each with its source, for a spot check.
     Ask with one AskUserQuestion call: the Tier A questions, the Tier B group question if any, and **Approve with these decisions** (recommended) or **Run another review round**. Recommend another round if Must fix comments were resolved this round, more than a few Tier A decisions were made, or the user edited the file heavily.
-22. Brief the Writer in Apply mode with the decisions. The Writer keeps the user's direct edits. Then brief the QA Reviewer in re-check mode on the changed rows and the mechanical check. If it passes and the user approved, go to step 23. If it fails, fix through the Writer once, then tell the user what is left. If another round was chosen, go back to step 17 with the next round number.
+22. If a decision adds, changes or removes a requirement or a business rule, first brief the Requirements Analyst in Update mode to record it in the requirement file, then brief the Writer in Apply mode with the decisions. Set `Applied in` on the Decisions rows (requirement file and version, feature ID). The Writer keeps the user's direct edits. Then brief the QA Reviewer in re-check mode on the changed rows and the mechanical check. If it passes and the user approved, go to step 23. If it fails, fix through the Writer once, then tell the user what is left. If another round was chosen, go back to step 17 with the next round number.
 23. On approval, set the status to `approved` and the version to the next whole number. A module with a `[PENDING` line, a Pending decision row or a Proposed default row cannot be approved. Update `trace.md` with the module's requirement-to-feature map and the approval date. Record any general decision as a Precedent. If publishing after each module was chosen, brief the Publisher.
 
 ### Stage 4: Whole-WBS check
@@ -96,7 +96,7 @@ In both modes:
 
 ### Stage 5: Publish and clean up
 26. Ask the user to approve publishing. Brief the Publisher for modules not yet published.
-27. Prepare the clean-up list: everything in `_work/`, superseded drafts, duplicates and scratch files that agents created. Show it to the user. After approval, remove the files. Keep inputs, project profile, status, requirement files, register, baseline, blueprint, approved module files and trace.
+27. Prepare the clean-up list: everything in `_work/`, superseded drafts, duplicates and scratch files that agents created. Show it to the user. After approval, remove the files. Keep inputs, project profile, status, requirement files, register, baseline, blueprint, approved module files, `reviews/` and trace.
 
 ## trace.md structure
 - `## Approvals`: date, item (baseline, blueprint, module and version, publishing), decision, by.
@@ -113,7 +113,8 @@ Each brief states: the agent's mode, the module, files to read, files to write, 
 - Do not start a module before the blueprint is approved. Do not start the next module before the current one is approved.
 - Do not write into scope any suggestion the user has not accepted.
 - No implied authority: do not let a reviewer's comment, a technical convention or a prototype decide scope or a business rule. These are Tier A decisions for the user. Do not let any agent narrow an accepted requirement through an assumption.
-- A point is resolved only when its Decisions row is Decided. A mention in an Assumptions block or in Queries for Client does not resolve it.
+- A point is resolved only when its Decisions row is Decided and `Applied in` is filled where the decision changed a requirement or the WBS. A mention in an Assumptions block or in Queries for Client does not resolve it.
+- Keep three things apart: what a source says, what the team decided (`Basis` in the register), and what the client approved. A team decision is never written as a client-approved fact.
 - Do not alter the reference format.
 - Only the Orchestrator adds round entries to a Review Log and assigns `AS-nnn` IDs from scan files.
 - Never remove files that agents did not create. Never remove inputs.

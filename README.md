@@ -7,7 +7,7 @@ A Claude Code plugin that produces a reviewed Work Breakdown Structure (WBS), mo
 1. Guided setup: a few selectable questions about the material, the output and the reviews.
 2. Requirements: the inputs (brief, documents, notes, prototype code) are read and turned into numbered requirements per module. An Advisor raises gaps, risks and suggestions. A Completeness Reviewer checks each module and lists open questions. The user answers and approves a baseline.
 3. Blueprint: modules, features, IDs and requirement coverage are planned and approved.
-4. Module loop: for each module the Writer drafts the WBS in markdown, a QA Reviewer and a Product Owner Reviewer review it, the user reviews and decides, and the module is approved.
+4. Module loop: for each module the Writer drafts the WBS in markdown, a QA Reviewer reviews it (and a Product Owner Reviewer for high-risk modules, or for every module if chosen), the user reviews and decides, and the module is approved. Reviews are kept as files under `reviews/`.
 5. Whole-WBS check, then publishing to the project's copy of the reference sheet, then clean-up of working files.
 
 Anything unclear or unconfirmed is recorded in a decision register. It is never written as a fact, and no agent may narrow or extend scope on its own. Points that change scope or set a business rule wait for your decision (marked `[PENDING ...]` in the module until decided). Safe defaults are listed for one-action acceptance. Technical details are left to the development team.
@@ -15,6 +15,8 @@ Anything unclear or unconfirmed is recorded in a decision register. It is never 
 ## How much you review
 
 In the default `balanced` mode the process stops for you at five points only: setup, the requirements decision sheet and baseline, the blueprint with the assumption sweep, each module's review summary, and the whole-WBS check with publishing. Agents run without stopping in between. Mechanical checks, wording and numbering are handled by the agents. `each step` mode adds a go-ahead after every agent step.
+
+Re-checks after a correction are limited to the changed features, and a decision that changes a business rule is applied to the requirement first and then to the WBS. Each decision records its basis: client source, team decision, or needs client confirmation.
 
 Progress is kept in `status.md`, with decisions in `requirements/register.md` and approvals in `trace.md`, so a closed chat can be resumed with `/wbs:start`.
 

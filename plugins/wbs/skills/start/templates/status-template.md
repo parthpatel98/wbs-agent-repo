@@ -23,8 +23,8 @@ State: Not started, In progress, Waiting for you, Done.
 
 ## Modules
 
-| No. | Module | Status | Version | Review round | Pending decisions | Published |
-|---|---|---|---|---|---|---|
+| No. | Module | Risk | Reviews | Status | Version | Review round | Pending decisions | Published |
+|---|---|---|---|---|---|---|---|---|
 
 ## Waiting for you
 

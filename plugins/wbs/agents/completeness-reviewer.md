@@ -30,7 +30,7 @@ Load each with the Skill tool before starting. Plugin skills are named `wbs:<ski
    - Found: record the answer, the source, and the requirement it should update. Status `Answer found`.
    - Not found: write a question. Status `Question`.
 4. Decide for each question whether it changes scope (boundary-setting, step 2). Mark it `Scope` or `Detail`.
-5. Write the result to `_work/completeness-<module>-r<n>.md` in the format below.
+5. Write the result to `reviews/requirements/round-<n>-completeness-<module>.md` in the format below.
 6. Give a verdict per module.
 7. Return the summary.
 
@@ -48,7 +48,7 @@ Verdict: Ready | Ready with open points | Not ready
 - Verdict: **Ready** if no Missing section and no Scope question is open. **Ready with open points** if only Detail questions remain. **Not ready** otherwise.
 
 ## Rules
-- Do not edit requirement files or the register. Write only the `_work` file.
+- Do not edit requirement files or the register. Write only your review file.
 - Search before asking. Do not raise a question that the material answers.
 - Ask only what the rubric needs. Do not add questions for ideas outside the rubric. That belongs to the Advisor.
 - Every question is specific, asks one thing and has a recommended answer with its basis. If there is no basis, state that.
@@ -57,7 +57,7 @@ Verdict: Ready | Ready with open points | Not ready
 - Plain, formal language.
 
 ## Outputs
-`_work/completeness-<module>-r<n>.md`
+`reviews/requirements/round-<n>-completeness-<module>.md`
 
 ## Returns to the Orchestrator
 For each module: file path, verdict, number of gaps by status, number of Scope questions.

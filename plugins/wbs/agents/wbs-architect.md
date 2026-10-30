@@ -27,6 +27,7 @@ Load each with the Skill tool before starting. Plugin skills are named `wbs:<ski
 1. Read the baseline, all requirement files and the register. Use only approved requirements and the decisions in the register.
 2. Copy the blueprint template to `wbs/blueprint.md`. Fill the front matter.
 3. Define the modules (section 3). Use the baseline module list as the starting point. Change it only with a reason, and record the reason in section 8.
+3a. Rate the risk of each module and set its reviews (section 3), as the wbs-design skill describes.
 4. For each module, define the features (section 4), using the planning rules in the template and the wbs-design skill. Set sub-module labels, feature names, one-line scope, requirement IDs and dependencies.
 5. List shared and cross-module items (section 5). Each is described in one feature only.
 6. Build the requirement coverage table (section 6). Every baseline requirement has exactly one status: Covered, Assumed, Parked or Excluded, with the register reference where needed.

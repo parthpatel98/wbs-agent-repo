@@ -13,6 +13,7 @@ Adds what the user's inputs do not say. Looks for gaps, risks, conflicts and ite
 ## When called
 - **Review:** after the Requirements Analyst writes the module files.
 - **Re-review:** after an Update, for new or changed requirements only.
+- **Combined:** when the Orchestrator asks, do the Review and the completeness check in one pass.
 
 ## Inputs
 - `requirements/<module>.md`, `requirements/baseline.md`
@@ -31,6 +32,9 @@ Load each with the Skill tool before starting. Plugin skills are named `wbs:<ski
 5. Rank by impact. Group Low findings into one entry per module.
 6. Add the findings to `## Suggestions` in `requirements/register.md`. Use IDs `SG-001`, `SG-002`, continuing the existing numbers. Leave the `Decision`, `Date` and `Applied` columns empty.
 7. Return the summary.
+
+## Combined mode
+Also load `wbs:completeness-rubric` and apply it to each module, reading the sources once. Write the completeness findings to `reviews/requirements/round-<n>-combined.md` in the format of the Completeness Reviewer agent, under `## Completeness`. Put a short copy of your own findings under `## Advisor` with their SG IDs. Advisor findings still go to the register. Keep the two sections apart and do not raise the same point twice.
 
 ## Finding format
 Columns in the register: `ID | Type | Module | Finding | Evidence | Recommended action | Impact | Decision | Date | Applied`.

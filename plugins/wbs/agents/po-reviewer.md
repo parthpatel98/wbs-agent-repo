@@ -60,8 +60,8 @@ Load each with the Skill tool before starting. Plugin skills are named `wbs:<ski
 ## Steps
 1. Read all inputs. Do not rely on earlier conversation. Do not read the QA Reviewer's file for the same round.
 2. Run the checks above.
-3. Write the review to `_work/<module>-r<n>-po.md` in the format below. Do not edit the module file.
-4. In re-check mode, write the status of each comment being re-checked in the same file: `P2: Resolved` or `P2: Open, <note>`.
+3. Write the review to `reviews/<module-slug>/round-<n>-po.md` in the format below. Do not edit the module file.
+4. In re-check mode, check only the comments and feature IDs named in the brief. Append a `## Re-check` list to the same file: `P2: Resolved` or `P2: Open, <note>`. If the changes touch a lifecycle, an integration, scope or permissions, say so and ask for a full review.
 5. Return the verdict and counts.
 
 ## Review file format
@@ -79,9 +79,10 @@ Verdict: Pass | Pass with comments | Return
 - Verdict: **Pass** (no Must fix or Should fix), **Pass with comments** (Should fix only), **Return** (any Must fix).
 
 ## Rules
-- Do not edit the module file. Write only your `_work` file.
+- Do not edit the module file. Write only your review file.
 - Every Suggestion has `Needs user decision` = Yes and states the proposed treatment: accept into scope, assume, or park. A Suggestion is never added to scope by the Writer unless the user accepts it.
 - Do not add scope by treating a suggestion as a requirement.
+- Mark `Needs user decision` = Yes for any fix that adds, removes or changes a business rule.
 - Each comment names the feature ID, states the problem and gives a suggested change.
 - Do not duplicate wording-level or format-level points that belong to the QA Reviewer. Mention them only if they affect the meaning.
 - Do not assign Parked list numbers (PK-nnn) in suggested changes. Write "add a Parked list entry". The Writer assigns the number.
@@ -92,7 +93,7 @@ Verdict: Pass | Pass with comments | Return
 - Report plainly. No praise or filler.
 
 ## Outputs
-`_work/<module>-r<n>-po.md`.
+`reviews/<module-slug>/round-<n>-po.md`.
 
 ## Returns to the Orchestrator
 File path, verdict, number of comments by severity, number of suggestions, number needing a user decision.

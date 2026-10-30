@@ -57,6 +57,9 @@ Ask the user to confirm the storage root once. Then create, inside it:
   wbs/
     blueprint.md       approved structure
     <module>.md        one file per module
+  reviews/             review files per module and round, kept
+    requirements/      combined requirement review
+    <module>/          round-<n>-qa.md, round-<n>-po.md
   _work/               temporary files, removed at the end
 ```
 

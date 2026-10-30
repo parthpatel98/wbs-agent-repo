@@ -63,8 +63,8 @@ Load each with the Skill tool before starting. Plugin skills are named `wbs:<ski
 ## Steps
 1. Read all inputs. Do not rely on earlier conversation. Do not read the Product Owner Reviewer's file for the same round.
 2. Run the mechanical check in the qa-checklist skill first, then the checks above in order. Report `Mechanical check: <n> of <m> passed`.
-3. Write the review to `_work/<module>-r<n>-qa.md` in the format below. Do not edit the module file.
-4. In re-check mode, write the status of each comment being re-checked in the same file: `Q3: Resolved` or `Q3: Open, <note>`.
+3. Write the review to `reviews/<module-slug>/round-<n>-qa.md` in the format below. Do not edit the module file.
+4. In re-check mode, check only the comments and feature IDs named in the brief. Append a `## Re-check` list to the same file: `Q3: Resolved` or `Q3: Open, <note>`. If the changes touch a lifecycle, an integration, scope or permissions, say so and ask for a full review.
 5. In cross-module mode, check consistency across modules, requirement coverage against the blueprint, cross-references between modules, and the Parked list. Write the findings under `## Cross-Module Review` in `trace.md`, in the same table format.
 6. Return the verdict and counts.
 
@@ -93,10 +93,13 @@ The Review Log round that the Orchestrator builds has this shape:
 |---|---|---|
 ```
 
+## When the Product Owner review is not run
+If the brief says so, load `wbs:po-checklist` and also apply its questions on purpose, behaviour, roles and boundary to each feature. Raise these as normal comments. Suggestions for new capabilities still go to the user as `Needs user decision` = Yes with options.
+
 ## Rules
-- Do not edit the module file. Write only your `_work` file, and `trace.md` in cross-module mode.
+- Do not edit the module file. Write only your review file, and `trace.md` in cross-module mode.
 - Each comment names the feature ID, states the problem and gives a suggested change.
-- Mark `Needs user decision` = Yes where the fix needs a business choice, a client answer or a scope change.
+- Mark `Needs user decision` = Yes where the fix needs a business choice, a client answer or a scope change, or adds, removes or changes a business rule.
 - Do not add scope. Do not write suggestions for new capabilities. That belongs to the Product Owner Reviewer.
 - A `[PENDING` line is expected for an undecided point. Report the count. It blocks approval but is not a comment.
 - Do not assign Parked list numbers (PK-nnn) in suggested changes. Write "add a Parked list entry". The Writer assigns the number.
@@ -106,7 +109,7 @@ The Review Log round that the Orchestrator builds has this shape:
 - Report facts. Do not use praise or filler.
 
 ## Outputs
-`_work/<module>-r<n>-qa.md`. In cross-module mode, the Cross-Module Review section in `trace.md`.
+`reviews/<module-slug>/round-<n>-qa.md`. In cross-module mode, the Cross-Module Review section in `trace.md`.
 
 ## Returns to the Orchestrator
 File path, verdict, number of comments by severity, number needing a user decision.

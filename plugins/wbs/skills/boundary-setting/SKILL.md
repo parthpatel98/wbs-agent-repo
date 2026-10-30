@@ -107,6 +107,9 @@ Rules:
 - A point found late (by a reviewer or the Writer, after the first scan) becomes a Decisions row with status Pending decision if it is Tier A, or Proposed default if it is Tier B. A Tier A behaviour is not drafted until the user decides. Late points are raised at the next module review, not as a separate interruption.
 - A requirement in the baseline with status Unclear or Proposed is a Tier A point. It is not drafted until decided.
 
+## Source, team decision and client approval
+Keep three things apart. A **source** says something (client material, a prototype, a note). A **team decision** is what the user decided for the draft. **Client approval** is evidence that the client agreed. A team decision with no client evidence has Basis `Team decision` and is not written as something the client approved. Where it affects what the client must provide or confirm, it follows the query rule. This adds no review step: Basis is set when the decision is recorded.
+
 ## No implied authority
 - **No business rule from technical convention.** Do not justify a business rule because it is standard practice. Examples: automatic retries, duplicate suppression, permanent rejection, retention periods, conflict-resolution rules. If it is internal mechanics inside an accepted requirement, it is Tier C and is not presented as client-approved. If it affects what users see, what is kept or what the client must live with, it is Tier A or B.
 - **No promotion from prototype.** Functionality seen only in a prototype has requirement status `Proposed`. It stays out of the baseline and the WBS until the user accepts it.
