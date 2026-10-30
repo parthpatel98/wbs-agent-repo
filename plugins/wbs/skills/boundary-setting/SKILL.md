@@ -45,7 +45,7 @@ Each point is one bullet in the `Assumptions:` block. Write plain statements in 
 - **Assumption with a default:** "Reset links expire after 24 hours unless the client specifies a different period."
 - **Parked:** start with "Parked for next phase:". "Parked for next phase: reset by SMS."
 - **Exclusion:** "Export to Excel is not included." Only for something that no accepted requirement asks for, or that the user has decided to exclude.
-- **Dependency on another party:** "The Opter integration supports Create and Update only. Retrieving orders is not available."
+- **Dependency on another party:** "The external system supports Create and Update only. Retrieving records is not available."
 
 Rules for wording:
 - Be specific. Name the item, the value or the limit.
