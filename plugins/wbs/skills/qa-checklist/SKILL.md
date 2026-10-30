@@ -27,7 +27,7 @@ Do these with Read and Grep. Report the result as one line at the top of the rev
 | M3 | Each Comments / Details cell has an `Assumptions:` line, and nothing follows its bullets except a PENDING line | Grep `Assumptions:`, read to the end of the cell |
 | M4 | Bullets start with `•`, nested points with two spaces and `-`. No other list markers in a cell | Grep lines starting with `- `, `* ` or digits inside cells |
 | M5 | No bullet is longer than about 25 words | Read. Flag above 30. |
-| M6 | No flagged word from the writing-standard avoid list, and no "etc." | Grep, case-insensitive |
+| M6 | No flagged word from the writing-standard avoid list, and no "etc." | Grep for whole words, case-insensitive. For "manage" and "support", flag only the vague verb use, not "Manager" or a named feature |
 | M7 | Behaviour bullets use "should". Assumption bullets do not use "should" | Grep `should` and compare with the Assumptions blocks |
 | M8 | No blank line at the start or end of a cell | Read |
 | M9 | Queries for Client is filled or reads `None`. No Developer Comments text | Read |

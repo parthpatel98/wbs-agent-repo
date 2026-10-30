@@ -93,6 +93,7 @@ Assumptions:
 3. For each feature, in order:
    - Write the introduction (one to three sentences).
    - Write the bullets from the linked requirements and from Decisions rows with the treatment In scope. A rule the user accepted is a normal behaviour bullet ("should"), with its AS ID in Traceability. One behaviour per bullet. Do not write from a `Proposed` requirement.
+   - A Decisions row can produce both a behaviour bullet and an assumption. Write the behaviour part as a normal bullet, and write only the basis that the client or a third party supplies as the assumption. A row with several points can produce several bullets. Keep one row and list every resulting bullet in Traceability.
    - Write each Assumed, Excluded and Parked row as a bullet in the Assumptions block. An assumption states a basis that the client or a third party supplies, in a plain statement. Behaviour is never written as an assumption. For a Parked row, create the Parked list entry (suggested phase "Next phase" unless the user named one) and write its PK ID in the row's resulting treatment. Do not write Left to development team or Logged rows.
    - A point that has no Decisions row is new. Classify it with the boundary-setting skill, add a row to the Decisions table (next AS number, tier, your recommendation) and, if it is Tier A, do not draft it. Put a `[PENDING AS-nnn: <short point>]` line at the end of the cell. Do not write a narrower or a wider reading, and do not use an exclusion to avoid the decision.
    - A Tier B row with status Proposed default is written with its recommended treatment (a body bullet for In scope, an Assumptions bullet for Assumed) and listed in your return summary as awaiting acceptance.
@@ -100,7 +101,8 @@ Assumptions:
    - Add a Queries for Client entry only under the query rule in the boundary-setting skill. The recommendation text in the register does not decide it.
    - Add a Parked list entry in `requirements/register.md` for each parked item. The ID is `PK-001`, `PK-002`, continuing the existing numbers. Columns: ID, Point, Feature ID, Reason, Suggested phase, Status (Parked, Accepted into scope, Dropped).
    - Reference other features by ID, using IDs from the blueprint.
-   - Add the feature's row to Traceability.
+   - Add the feature's row to Traceability. Write a bullet once, in the feature that fits it best, and refer to it from the other feature by ID. A Pending row that affects two features gets its PENDING line in the feature named in the row, and `Pending: AS-nnn` in the Traceability of the other.
+   - If a Decided row is ambiguous, write its wording as it stands and list the ambiguity in the return summary. Do not resolve it yourself.
 4. Match the wording and the phrasing of the style reference for the same kind of statement.
 5. Run the self-check below, including the mechanical check.
 6. Add the first Change Log entry. Set `status: draft`, `version: 0.1`.
