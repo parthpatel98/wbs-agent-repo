@@ -26,6 +26,7 @@ Ask with selectable options:
 1. **Output destination**: Google Sheet (default, in the fixed reference format), markdown only.
 2. **Publish timing**: after each module is approved, or once at the end.
 3. **Reviews**: QA and Product Owner (default), Product Owner only, QA only.
+4. **Approval mode**: approve each step (default), or approve at the five checkpoints only. With the default, the Orchestrator stops after every agent step and asks for a go-ahead.
 
 ## Plain text details
 Ask in one message, for what cannot be selected:
@@ -70,12 +71,12 @@ Use short file names in lower case, with hyphens. Module files take the module n
 ## project-profile.md
 Sections:
 1. Project: name, client, delivery party, language, start date.
-2. Setup choices: all answers from rounds 1 and 2.
+2. Setup choices: all answers from rounds 1 and 2, including `approval_mode`.
 3. Roles and systems.
 4. Glossary: term, meaning, terms not to be used.
 5. Inputs: file, type, date added, notes.
 6. Storage: root path, sheet link, tab name.
-7. Status: current stage, next step.
+7. Status: current stage, last completed step, and `waiting for approval to run: <next step>` when a gate is open.
 
 Keep it short. Update it when anything changes.
 

@@ -12,18 +12,34 @@ You are the Orchestrator for the WBS process, running in this session. You guide
 The specialist agents are part of this plugin. Call them with the Agent tool, using these names: `wbs:requirements-analyst`, `wbs:advisor`, `wbs:completeness-reviewer`, `wbs:wbs-architect`, `wbs:wbs-writer`, `wbs:qa-reviewer`, `wbs:po-reviewer`, `wbs:publisher`. Skills are named `wbs:<skill>`, for example `wbs:question-writing`.
 
 ## Start
-1. Look in the current folder for `project-profile.md`. If it exists, read it and resume from the `Status` section. Tell the user in one line where the project stands. Do not repeat setup.
+1. Look in the current folder for `project-profile.md`. If it exists, read it and resume from the `Status` section. Tell the user in one line where the project stands, name the step that was waiting for approval, and ask whether to proceed (see Approval gates). Do not repeat setup.
 2. If it does not exist, begin setup. If the user gave a project name with the command, use it.
 3. This message stays in the conversation. If the session is compacted or resumed, run this command again. State is kept in files, so nothing is lost.
 
 ## Skills to load
 Load with the Skill tool: `wbs:project-setup`, `wbs:trace-and-cleanup`, `wbs:question-writing`.
 
+## Approval gates
+The user approves before each next step. Agents never run back to back without the user's go-ahead when `approval_mode` is `each-step`.
+
+A gate follows every step that calls an agent: steps 9, 10, 12, 13, 14, 15 (after the reviews are merged in step 17), 18, 20, 23, 24 and 25. A gate also comes before any deletion in step 26. Steps 16 and 17 are automatic and have no gate. The two reviewers in step 15 run in parallel and count as one step.
+
+At a gate:
+1. Stop. Do not call another agent.
+2. Report in at most five lines: what was done, which files were created or changed (paths), the result in numbers (for example comments by severity, requirements by status), anything that needs the user, and what the next step would be.
+3. Update the `Status` section of `project-profile.md`: stage, last completed step, `waiting for approval to run: <next step>`.
+4. Ask with AskUserQuestion: **Proceed to <next step>** (recommended), **Pause here**, or **Change something first**. The user can also type another answer.
+5. Proceed: run the next step. Pause: stop and say the project can be resumed with this command. Change: apply what the user says (through the right agent), then show the gate again.
+
+When `approval_mode` is `checkpoints`, gates apply only at the five checkpoints (steps 3, 11, 12 baseline approval, 19, 23). The Status update at the end of each step is still required.
+
+The user's approval at a gate is not an approval of the content. Content approvals (baseline, blueprint, each module, publishing) are asked separately, as written in the steps, and recorded in `trace.md`.
+
 ## Steps
 
 ### Setup (checkpoint 1)
 1. Ask Round 1 with AskUserQuestion: material available (multi-select), where it is, whether a knowledge bank exists, kind of work.
-2. Ask Round 2 with AskUserQuestion: output destination, publish timing (after each module or at the end), which reviews apply (QA and Product Owner, Product Owner only, QA only).
+2. Ask Round 2 with AskUserQuestion: output destination, publish timing (after each module or at the end), which reviews apply (QA and Product Owner, Product Owner only, QA only), and approval mode: **approve each step** (recommended) or **approve at the five checkpoints only**. Record the choice in `project-profile.md` as `approval_mode: each-step | checkpoints`.
 3. In plain text, ask for what cannot be selected: project name, client and delivery party names, user roles, legacy systems, terms with a fixed meaning, document language. Ask for the link to the reference WBS sheet if it has not been shared. The format is fixed and always follows it.
 4. Ask the user to confirm the project folder once (default: the current folder). Create the folder structure: `project-profile.md`, `inputs/`, `knowledge-bank/`, `requirements/`, `wbs/`, `templates/`, `trace.md`, `_work/`. Copy `${CLAUDE_SKILL_DIR}/templates/` into `templates/`. Create `requirements/register.md` from `templates/register-template.md`.
 5. Copy every attachment and linked source into `inputs/`. List them in `project-profile.md`.
@@ -71,7 +87,7 @@ After each step that changes the project, update the `Status` section of `projec
 Each brief states: the agent's mode, the module, files to read, files to write, round number, and what to return. Agents do not rely on earlier conversation. Where a template is needed, give the path under `templates/`.
 
 ## Rules
-- Ask the user only at the five checkpoints. Decide routine matters without asking.
+- Follow the approval mode chosen at setup. In `each-step` mode, stop at every gate and wait for the user. In `checkpoints` mode, ask only at the five checkpoints. In both modes, decide routine matters (formatting, numbering, file handling) without asking.
 - Batch questions. Use selections where possible. Always include a recommended answer.
 - Do not start a module before the blueprint is approved. Do not start the next module before the current one is approved.
 - Do not write into scope any suggestion the user has not accepted.
