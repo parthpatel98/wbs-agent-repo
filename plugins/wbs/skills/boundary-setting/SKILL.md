@@ -17,21 +17,21 @@ This is the control that keeps the scope clear. Nothing unclear or unconfirmed i
 
 | Class | Meaning | Where it appears |
 |---|---|---|
-| **Requirement** | Confirmed in the inputs, the knowledge bank or a user answer | Bullets in Comments / Details |
-| **Assumption** | Not confirmed. A reasonable default is built into this phase unless the client says otherwise. | `Assumptions:` block. Also Queries for Client if the client must confirm. |
+| **Requirement** | Confirmed in the inputs, the knowledge bank, a user answer, or a user decision (including an accepted default) | Bullets in Comments / Details |
+| **Assumption** | A basis the work depends on that the client or a third party must provide or confirm, or an external fact not yet known | `Assumptions:` block. Also Queries for Client if the client must confirm. |
 | **Parked** | Useful or implied, but not part of this phase | `Assumptions:` block, as "Parked for next phase", and the Parked list |
 | **Exclusion** | Out of scope and not planned | `Assumptions:` block, as "X is not included" |
 | **Question (Pending decision)** | Unclear, and the answer changes the scope or sets a business rule | Asked to the user. Until decided it is not written as a requirement, an assumption or an exclusion. A line `[PENDING AS-nnn: <short point>]` marks the place in the cell. |
 | **Left to development team** | A technical implementation detail inside an accepted requirement, with no effect on what users see, what is kept, or what the client must live with | Not written in the cell. Logged in the register as Tier C. |
 
-Assumption means included on a stated basis. Parked means not included now, but a candidate for later. Exclusion means not included and not planned.
+An accepted default is not an assumption. When the user accepts a recommended rule (for example "a request with a start date in the past is rejected"), it is decided, and it is written as a normal behaviour bullet with its source in Traceability. An assumption states a basis that someone else must supply, for example "The client provides the working days of the week." Behaviour is never written as an assumption. Assumption means included on a stated basis. Parked means not included now, but a candidate for later. Exclusion means not included and not planned.
 
 ## Decision steps
 Apply these steps in sequence to every point:
 
 1. **Is it confirmed?** Find a source: a requirement ID, the knowledge bank, or a user answer. If yes, it is a **requirement**.
 2. **Does the answer materially change the scope or set a business rule?** It does if it adds or removes a feature, a role, an integration, a data migration or a way of working for users, if it narrows an accepted requirement, or if it fixes a rule the sources do not state. If yes, it is a **question** (Tier A). Record it in the Decisions table with status Pending decision. Do not draft it, and do not write it as an assumption or an exclusion. Put a `[PENDING AS-nnn: <short point>]` line in the cell. The Writer cannot ask the user. It records the point, and the Orchestrator asks the user. After the decision, the Writer updates the cell in Apply mode and removes the line.
-3. **Is there a sensible default that fits this phase, and does it add no scope and remove none?** If yes, it is an **assumption** (Tier B). If the client must confirm it, add a Queries for Client entry.
+3. **Is there a sensible default that fits this phase, and does it add no scope and remove none?** If yes, it is Tier B. The recommended treatment is **In scope** for a rule or behaviour inside a planned feature, or **Assumed** when the default rests on something the client must provide or confirm. If the client must confirm it, add a Queries for Client entry.
 4. **Is the point valuable, but not asked for by any accepted requirement, and outside this phase?** If yes, it is **parked**. Add the Parked list entry. If an accepted requirement implies the point, parking it narrows the requirement. Go back to step 2.
 5. **Otherwise**, if it is clearly not wanted or not related, and no accepted requirement asks for it, it is an **exclusion**.
 
@@ -58,8 +58,8 @@ Rules for wording:
 - Phrase as an action: "Client to provide the password policy." or "Confirm the expiry period of reset links."
 - A query is specific enough to be answered in one reply.
 - Do not add a query for an exclusion or a parked item.
-- Add a query only when a wrong assumption would change the scope or the build. A common default that is cheap to change is an assumption without a query.
-- Review any feature with more than five queries. Merge related queries and drop the minor ones.
+- Add a query only when a wrong assumption would change the scope or the build. A common default that is cheap to change needs no query. The query rule decides, not the recommendation text in the register.
+- A feature with more than five queries is reviewed before it is returned. Merge related queries and drop minor ones.
 - Do not invent a business rule to close a comment. A fix that narrows or changes what the sources state is a decision for the user.
 
 ## Recording

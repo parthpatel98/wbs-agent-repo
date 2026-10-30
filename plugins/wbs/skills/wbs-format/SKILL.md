@@ -113,10 +113,10 @@ baseline: <version>
 
 - One `### <ID>` block per feature or sub-feature, in blueprint order.
 - The module header line is the first `##` heading. `## Traceability`, `## Review Log` and `## Change Log` follow the last feature block, in that order. They are not published.
-- Traceability has one row per feature: the requirement IDs it uses, and each assumption bullet with its register ID (for example `Reset links expire after 24 hours. : AS-007`). It is how reviewers check that nothing is written without a source or a decision.
+- Traceability has one row per feature: the requirement IDs used, and every bullet that rests on a decision, with its register ID. Give the first words of the bullet, then a colon and the ID (for example `Reset links expire: AS-007`). Separate entries with a semicolon. Add `Pending: AS-nnn` for points not yet drafted and `Not written: AS-nnn` for Tier C points. Do not type the bar character. It is how reviewers check that nothing is written without a source or a decision.
 - In any markdown table, do not type the bar character inside a cell. Write the audience in its own column. The module header line with its `  |  <audience>` separator is only ever written as a heading, never inside a table.
-- A point waiting for the user is marked with a line `[PENDING AS-nnn: <short point>]` at the end of the cell. The line is temporary. It is removed when the user decides. A module with a PENDING line cannot be approved or published.
-- Cell text has no blank lines at its start or end.
+- A point waiting for the user is marked with a line `[PENDING AS-nnn: <short point>]`. Use one line per point, in AS order, directly after the last line of the cell, with no blank line before it. The lines are temporary. Each is removed when the user decides. A module with a PENDING line cannot be approved or published.
+- Cell text has no blank lines at its start or end. The `baseline:` value is the requirement baseline version in the blueprint front matter.
 
 ## Worked example
 Adapted from the reference. It shows the order of parts, the characters and the Assumptions block.

@@ -37,7 +37,7 @@ WBS text is read by clients, project managers and developers. It must be clear, 
 - **UI labels:** write them as they appear on screen, with the same capital letters, for example the "Forgot password" link.
 - **Defined terms:** capitalise as the glossary does. Do not capitalise ordinary words.
 - **Cross-references:** write the feature ID in brackets, for example "(Feature 1.2)". The ID must exist in the blueprint.
-- **People:** write roles, never personal names.
+- **People:** write roles, never personal names. Write each role as the glossary spells it, capitalised, for example Employee, Manager, HR Admin. Use the glossary term for the role and a plain phrase for the relationship, for example "the Manager of the Employee".
 - **Lists:** do not write "etc.", "and so on" or "and more". List the items, or say "the following".
 
 ## Words and phrases to avoid

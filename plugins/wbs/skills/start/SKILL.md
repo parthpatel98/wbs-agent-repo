@@ -65,12 +65,12 @@ In both modes:
 
 ### Stage 2: Blueprint and assumption sweep
 13. Brief the WBS Architect to fill the blueprint template (`templates/wbs-blueprint-template.md`).
-14. **Assumption sweep.** Brief the WBS Writer in Scan mode for every module, in parallel. Each writes `_work/scan-<module-slug>.md`. The module slug is the module name in lower case with hyphens, the same name as the file in `wbs/`. Merge the rows into the Decisions table of the register, assign the `AS-nnn` IDs in sequence, and apply Precedents: a point covered by a precedent becomes Decided and is reported, not asked. If a Writer reports a blueprint gap (a requirement in no feature, or a wrong mapping), brief the WBS Architect to correct the blueprint before the decision sheet is shown.
+14. **Assumption sweep.** Brief the WBS Writer in Scan mode for every module, in parallel. Each writes `_work/scan-<module-slug>.md`. The module slug is the module name in lower case with hyphens, the same name as the file in `wbs/`. Merge the rows into the Decisions table of the register, assign the `AS-nnn` IDs in sequence, replace every `NEW-n` reference inside the rows with the matching AS ID, and apply Precedents: a point covered by a precedent becomes Decided and is reported, not asked. If a Writer reports a blueprint gap (a requirement in no feature, or a wrong mapping), brief the WBS Architect to correct the blueprint before the decision sheet is shown.
 15. **Blueprint and decision sheet (G3).** Present the blueprint summary (modules, number of features, coverage, open structural points) and one decision sheet for all modules, by tier:
     - Tier A: each point as a question with options and a recommendation.
     - Tier B (status Proposed default): one compact table. Ask one question: **Accept all recommended** (recommended), **Accept all except the ones I list**, or **Show each item**. Accepted rows become Decided.
     - Tier C (status Logged): the count only. They are logged as Left to development team.
-    Record every decision in the register with its resulting treatment, status Decided and the date. Record general rules as Precedents. Save the blueprint as `wbs/blueprint.md` and record the approval in `trace.md`. Points the user leaves open stay Pending decision.
+    Record every decision in the register with its resulting treatment, status Decided and the date. If a decision answers only part of a point, mark the row Decided for that part and add a new row for the rest. Record general rules as Precedents. Save the blueprint as `wbs/blueprint.md` and record the approval in `trace.md`. Points the user leaves open stay Pending decision.
 
 ### Stage 3: Module loop (one module at a time, in blueprint order)
 16. Brief the WBS Writer in Draft mode, with the path of the first approved module as the style reference once one exists. When it returns, set the module status to `in review`.
