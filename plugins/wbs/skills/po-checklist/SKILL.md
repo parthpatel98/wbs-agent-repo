@@ -48,6 +48,9 @@ The Product Owner Reviewer reads the module as the owner of the product would. T
 - Is each assumption specific enough to be wrong or right?
 - Does each query ask for one thing that the client can answer?
 - Would the client read the Assumptions block and know what is not included?
+- Does any assumption or exclusion narrow what an accepted requirement says? If so, it is a decision for the user, not an assumption.
+- Is any function written as scope that comes only from a prototype?
+- Is any technical convention written as a business rule?
 
 ## Questions for the whole module
 - Does the module cover what its purpose says?
@@ -80,7 +83,7 @@ Rules for a suggestion:
 ## Writing a comment
 - One issue per comment, with the feature ID.
 - Say what the reader cannot tell, in plain words. Example: "The text does not say who can cancel an approved request."
-- Give the change that would answer it. If the answer is not in the sources, set `Needs user decision` = Yes and say what to ask.
+- Give the change that would answer it. If the answer is not in the sources, set `Needs user decision` = Yes and say what to ask. Give options and a recommendation: `Options: A <treatment>. B <treatment>. Recommended: A, <reason>.` You may not tell the Writer to choose a business rule. The comment stays `Needs decision` until the user decides, and is never Resolved before that.
 - Raise an issue from the product point of view even if QA may also raise it. The Orchestrator groups duplicates.
 
 Example:
@@ -88,6 +91,12 @@ Example:
 | No. | Feature ID | Severity | Comment | Suggested change | Needs user decision | Status |
 |---|---|---|---|---|---|---|
 | P3 | 3.2 | Should fix | The text does not say what the employee sees when the balance is not enough. | Add a bullet: the request should be rejected with a message that shows the available balance. | No | Open |
+
+## Keeping the review short
+- One comment per root cause, with the feature IDs listed.
+- Do not raise a Note unless it changes what the Writer or the user should do.
+- Do not comment on a point already Decided in the register.
+- Mechanical points (format, length, listed words, numbering) belong to the QA Reviewer. Mention them only if they change the meaning.
 
 ## Re-check
 - Check only the comments in the list given.

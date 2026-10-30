@@ -48,7 +48,7 @@ Tab `WBS`. Header row frozen. Columns: A `#`, B `Module`, C `Sub-Module`, D `Fea
 
 ## Steps
 1. **Check status.** Read the module file. If `status` is not `approved`, stop and report. Do not publish.
-2. **Pre-check.** Confirm: IDs are unique and in natural order; every feature has B, C, D and E; no cell exceeds 50,000 characters; the Review Log has no comment with Severity Must fix and Status Open. Report failures and stop.
+2. **Pre-check.** Confirm: IDs are unique and in natural order; every feature has B, C, D and E; no cell exceeds 50,000 characters; the Review Log has no comment with Severity Must fix and Status Open or Needs decision; the file has no `[PENDING` line; the register has no Decisions row in status Pending decision for the module's features. Report failures and stop.
 3. **Open the sheet.** Read the tab with `get_spreadsheet` and `get_values`. If the sheet or tab is missing, stop and report to the Orchestrator.
 4. **Set column A to plain text** before writing IDs, so that 1.10 stays 1.10. Write values as raw text.
 5. **Header row.** Find the module's header row by its text. If missing, insert it in the correct position, then merge A to G.

@@ -102,13 +102,20 @@ baseline: <version>
 #### Queries for Client
 <cell text or None>
 
+## Traceability
+| Feature ID | Requirements | Assumption bullets and their register IDs |
+|---|---|---|
+
 ## Review Log
 
 ## Change Log
 ```
 
 - One `### <ID>` block per feature or sub-feature, in blueprint order.
-- The module header line is the first `##` heading. `## Review Log` and `## Change Log` follow the last feature block.
+- The module header line is the first `##` heading. `## Traceability`, `## Review Log` and `## Change Log` follow the last feature block, in that order. They are not published.
+- Traceability has one row per feature: the requirement IDs it uses, and each assumption bullet with its register ID (for example `Reset links expire after 24 hours. : AS-007`). It is how reviewers check that nothing is written without a source or a decision.
+- In any markdown table, do not type the bar character inside a cell. Write the audience in its own column. The module header line with its `  |  <audience>` separator is only ever written as a heading, never inside a table.
+- A point waiting for the user is marked with a line `[PENDING AS-nnn: <short point>]` at the end of the cell. The line is temporary. It is removed when the user decides. A module with a PENDING line cannot be approved or published.
 - Cell text has no blank lines at its start or end.
 
 ## Worked example
@@ -146,6 +153,7 @@ None
 - [ ] `Assumptions:` is present, spelled exactly, and appears once at the end.
 - [ ] Every query has a matching assumption.
 - [ ] Developer Comments is not written.
+- No `[PENDING ...]` line remains in a row that is submitted for approval.
 
 ## Common mistakes
 - Hyphen or asterisk bullets instead of `•`.

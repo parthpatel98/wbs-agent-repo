@@ -25,6 +25,10 @@ Every decision is written in a file. Nothing is kept only in the conversation. A
 | Publishing | `trace.md`, Publish Log | Publisher |
 | Whole-WBS findings | `trace.md`, Cross-Module Review | QA Reviewer |
 | Setup choices, inputs, glossary | `project-profile.md` | Orchestrator |
+| Current stage, module status, what waits for the user, next step | `status.md` | Orchestrator |
+| Every assumption, exclusion, parked item and question, with the decision and treatment | `requirements/register.md`, Decisions | Writer (new rows), Orchestrator (decisions) |
+| Review summary of each round | Module file, Review Log (`#### Review Summary`) | Orchestrator |
+| Source of each assumption bullet | Module file, Traceability | Writer |
 
 ## trace.md
 Four sections, each a table.
@@ -59,6 +63,7 @@ Every baseline requirement appears at least once. A requirement that is parked o
 - On approval, the version becomes the next whole number.
 - A module changed after approval goes back to `in review`, with a version increase of 0.1 from the whole number, and goes through review and approval again.
 - The Orchestrator sets the status. The Writer sets the version when it saves a revision.
+- A module with any `[PENDING` line, or any Decisions row for its features in status Pending decision, cannot be set to `approved`.
 
 ## Review Log rules
 - Round entries are added by the Orchestrator only, from the reviewers' files.
@@ -71,7 +76,7 @@ Done at the end (Stage 5), after publishing, and only with the user's approval.
 
 ### Files that stay
 - `inputs/` and everything in it.
-- `project-profile.md`, `knowledge-bank/`.
+- `project-profile.md`, `status.md`, `knowledge-bank/`.
 - `requirements/` (module requirement files, `baseline.md`, `register.md`).
 - `wbs/blueprint.md` and the approved module files.
 - `trace.md`.

@@ -64,6 +64,16 @@ Every question carries a recommended answer, marked as the recommendation, with 
    If not answered: <how the point will be treated: assumption, parked or excluded>
 ```
 
+## Decision sheet
+The Orchestrator collects the open points of a phase into one decision sheet, so the user decides once. The sheet follows the tiers in the boundary-setting skill.
+
+- **Tier A:** each point is a question with options and a recommended answer. Use AskUserQuestion, up to four questions in one call. If there are more than four, ask the highest impact first, then the rest in the next call of the same sheet.
+- **Tier B:** show one compact table: ID, feature, assumption, recommended treatment. Then ask one question with three options: **Accept all recommended** (recommended), **Accept all except the ones I list**, **Show each item**. One action decides the whole group.
+- **Tier C:** not shown. State the count and where it is logged.
+- **Precedents:** list the points decided by an earlier precedent, with the precedent ID. They are not asked again.
+
+After the user answers, record every decision in the Decisions table of `requirements/register.md` with its resulting treatment, status Decided and the date. If the user's answer is a general rule, ask once whether to apply it to later points of the same type, and record it under Precedents.
+
 ## Recording answers
 - Record each answer in `requirements/register.md` with the question, the answer, the date and the feature IDs affected.
 - An answer from the user is a confirmed requirement. Mark the source as "User answer" with the date.

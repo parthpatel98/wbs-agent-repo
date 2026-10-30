@@ -48,6 +48,7 @@ Load each with the Skill tool before starting. Plugin skills are named `wbs:<ski
 - Items parked for the next phase are reasonable and are in the Parked list.
 - Every point that needs the client appears in Queries for Client, and the question is specific enough to be answered.
 - The Assumptions block states what is excluded, not only what is assumed.
+- No assumption or exclusion narrows an accepted requirement. No prototype-only function is written as scope. No technical convention is written as a business rule.
 
 ### 6. Dependencies
 - Dependencies on other features, systems or client inputs are stated and use valid IDs.
@@ -74,7 +75,7 @@ Verdict: Pass | Pass with comments | Return
 ```
 - Number comments `P<n>` (for example P1, P2) and keep numbers across rounds.
 - Severity: **Must fix** (scope, clarity or boundary problem that blocks approval), **Should fix** (clarity or wording), **Note** (observation, no change needed), **Suggestion** (an idea outside the confirmed scope).
-- Status: Open, Resolved, Deferred. New comments are Open.
+- Status: Open, Resolved, Deferred, Needs decision. New comments are Open. A comment with `Needs user decision` = Yes is `Needs decision` until the user decides, and is never Resolved before that.
 - Verdict: **Pass** (no Must fix or Should fix), **Pass with comments** (Should fix only), **Return** (any Must fix).
 
 ## Rules
@@ -85,6 +86,8 @@ Verdict: Pass | Pass with comments | Return
 - Do not duplicate wording-level or format-level points that belong to the QA Reviewer. Mention them only if they affect the meaning.
 - Do not assign Parked list numbers (PK-nnn) in suggested changes. Write "add a Parked list entry". The Writer assigns the number.
 - Keep the review file to the verdict and the table. Text outside the table is not copied to the Review Log.
+- When a decision is needed, write options and a recommendation: `Options: A <treatment>. B <treatment>. Recommended: A, <reason>.` Do not instruct the Writer to choose a business rule.
+- One comment per root cause. Do not comment on a point already Decided in the register.
 - The same issue may also be raised by the QA Reviewer. Raise it from your own point of view. The Orchestrator groups duplicates.
 - Report plainly. No praise or filler.
 

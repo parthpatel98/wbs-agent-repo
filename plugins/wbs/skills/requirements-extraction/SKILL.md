@@ -46,6 +46,7 @@ Do not include background, history or marketing text, unless it states a need.
 | Confirmed | Stated clearly in a source |
 | Unclear | The source is silent, vague or open to two readings. The note says why. |
 | Conflict | Two sources differ. Both are named. |
+| Proposed | Seen only in a prototype or code, with no supporting requirement in any other source. Not in scope and not in the baseline until the user accepts it. |
 | Withdrawn | No longer applies. The reason is stated. |
 
 ## Sources
@@ -91,6 +92,8 @@ status: draft
 ```
 Type: Functional, Data, Rule, Notification, Report, Integration, Non-functional, Constraint.
 
+A `Proposed` requirement is listed in the table with its source. It is not counted in the baseline. If the user accepts it, the status becomes `Confirmed` and the source is the register entry that records the acceptance.
+
 ## Baseline layout (`requirements/baseline.md`)
 ```
 ---
@@ -107,11 +110,15 @@ approved_on:
 | ID | Module | Status |
 |---|---|---|
 
+## Proposed (not in scope)
+| ID | Module | Source |
+|---|---|---|
+
 ## Change Log
 | Version | Date | Change | Reason | Changed by |
 |---|---|---|---|---|
 ```
-The Requirements Analyst writes the content. The Orchestrator sets the status, version and approval date.
+The Requirements Analyst writes the content. The Orchestrator sets the status, version and approval date. The requirement index lists Confirmed and Unclear requirements only. Proposed requirements are listed separately and are not counted.
 
 ## Marking unclear points
 Apply the boundary-setting skill. If a source is silent on something the feature needs, record it in Open points. Do not add a requirement for it. Do not choose a reading.

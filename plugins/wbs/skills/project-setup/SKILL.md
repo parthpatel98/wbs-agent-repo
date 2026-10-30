@@ -26,7 +26,7 @@ Ask with selectable options:
 1. **Output destination**: Google Sheet (default, in the fixed reference format), markdown only.
 2. **Publish timing**: after each module is approved, or once at the end.
 3. **Reviews**: QA and Product Owner (default), Product Owner only, QA only.
-4. **Approval mode**: approve each step (default), or approve at the five checkpoints only. With the default, the Orchestrator stops after every agent step and asks for a go-ahead.
+4. **Approval mode**: **balanced** (default) or **each step**. Balanced stops for the user at the decision points only: the requirements decision sheet and baseline, the blueprint with the assumption sweep, each module approval, and the whole-WBS check with publishing. Agents run without stopping in between. Each step stops after every agent step.
 
 ## Plain text details
 Ask in one message, for what cannot be selected:
@@ -46,6 +46,7 @@ Ask the user to confirm the storage root once. Then create, inside it:
 ```
 <project>/
   project-profile.md
+  status.md
   trace.md
   inputs/              original material, never edited
   knowledge-bank/      reusable reference notes
@@ -88,6 +89,9 @@ Keep it short. Update it when anything changes.
 
 ## trace.md
 Create it with the four sections: Approvals, Requirement-to-Feature Map, Publish Log, Cross-Module Review. Each starts with a table header and no rows.
+
+## status.md
+Create it from `templates/status-template.md`. It is the progress board. The Orchestrator updates it after every step: stage states, one row per module (status, version, review round, pending decisions, published), what is waiting for the user, and the next step. On resume it is read first and checked against the module files and `trace.md`.
 
 ## Task list
 Create the task list for the stages: requirements, blueprint, each module, whole-WBS check, publish, clean-up. Add the modules once the blueprint is approved. Update after each stage.

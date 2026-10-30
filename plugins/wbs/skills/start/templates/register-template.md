@@ -21,12 +21,24 @@ Findings from the Advisor. The user decides each one: Accept into scope, Assume,
 | ID | Type | Module | Finding | Evidence | Recommended action | Impact | Decision | Date | Applied |
 |---|---|---|---|---|---|---|---|---|---|
 
-## Assumptions
+## Decisions
 
-Project-level assumptions. Feature-level assumptions are in the module files.
+One row for every assumption, exclusion, parked item and question. A point is resolved only when its row is Decided. Appearing in an Assumptions block or in Queries for Client does not resolve it.
 
-| ID | Assumption | Module | Basis | Client to confirm |
+Tier A: needs the user's answer. Tier B: recommended default, accepted by group. Tier C: technical detail left to the development team, not shown for decision.
+
+Status: Pending decision (Tier A, needs an answer), Proposed default (Tier B, awaiting acceptance), Logged (Tier C), Decided. Before the decision, `Agent recommendation` holds the proposed treatment and a short reason, and `User decision` and `Resulting treatment` are empty. After the decision, `Resulting treatment` is one of: In scope, Assumed, Parked (with PK id), Excluded, Dropped, Left to development team. `Date` is the date of the last change.
+
+| ID | Point | Source or reason | Feature ID | Module | Tier | Agent recommendation | User decision | Resulting treatment | Status | Date |
+|---|---|---|---|---|---|---|---|---|---|---|
+
+## Precedents
+
+A decision that the user wants applied to later points of the same type. Applied precedents are reported in the module review summary.
+
+| ID | Rule | Applies to | From decision | Date |
 |---|---|---|---|---|
+
 
 ## Parked list
 

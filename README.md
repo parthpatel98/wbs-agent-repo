@@ -10,14 +10,20 @@ A Claude Code plugin that produces a reviewed Work Breakdown Structure (WBS), mo
 4. Module loop: for each module the Writer drafts the WBS in markdown, a QA Reviewer and a Product Owner Reviewer review it, the user reviews and decides, and the module is approved.
 5. Whole-WBS check, then publishing to the project's copy of the reference sheet, then clean-up of working files.
 
-Anything unclear or unconfirmed is recorded as an assumption, an exclusion or an item parked for the next phase. It is never written as a fact.
+Anything unclear or unconfirmed is recorded in a decision register. It is never written as a fact, and no agent may narrow or extend scope on its own. Points that change scope or set a business rule wait for your decision (marked `[PENDING ...]` in the module until decided). Safe defaults are listed for one-action acceptance. Technical details are left to the development team.
+
+## How much you review
+
+In the default `balanced` mode the process stops for you at five points only: setup, the requirements decision sheet and baseline, the blueprint with the assumption sweep, each module's review summary, and the whole-WBS check with publishing. Agents run without stopping in between. Mechanical checks, wording and numbering are handled by the agents. `each step` mode adds a go-ahead after every agent step.
+
+Progress is kept in `status.md`, with decisions in `requirements/register.md` and approvals in `trace.md`, so a closed chat can be resumed with `/wbs:start`.
 
 ## Install
 
 In Claude Code:
 
 ```
-/plugin marketplace add <owner>/wbs-agents
+/plugin marketplace add parthpatel98/wbs-agent-repo
 /plugin install wbs@wbs-agents
 ```
 

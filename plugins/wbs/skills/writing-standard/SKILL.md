@@ -41,27 +41,28 @@ WBS text is read by clients, project managers and developers. It must be clear, 
 - **Lists:** do not write "etc.", "and so on" or "and more". List the items, or say "the following".
 
 ## Words and phrases to avoid
-Replace or delete them.
+A word on this list is a flag to check, not an automatic failure. Some are correct when they are the exact word (for example "ensure" in a stated rule). When no direct replacement reads naturally, do not swap one word for another. Rewrite the sentence around the behaviour, the value or the condition.
 
-| Avoid | Use instead |
-|---|---|
-| seamless, seamlessly | (delete) |
-| robust, powerful, cutting-edge, state-of-the-art, best-in-class | (delete) |
-| intuitive, user-friendly, easy to use | describe the behaviour |
-| leverage, utilise | use |
-| empower, enable (as a vague verb) | "allow" or name the action |
-| streamline, optimise (without a measure) | state the change |
-| comprehensive, holistic, end-to-end (as decoration) | state what is covered |
-| enhance, improve (without a measure) | state the change |
-| ensure (overused) | "make sure", or state the rule |
-| in order to | to |
-| it is important to note that, please note | (delete) |
-| furthermore, moreover, additionally, in addition | start a new bullet, or use "and" |
-| various, several, numerous | the number, or the list |
-| as needed, as appropriate, if required, where applicable | state the condition |
-| etc., and so on | list the items |
-| intelligent, smart, magic, AI-powered (as a selling word) | describe what it does |
-| delve, landscape, journey, ecosystem, game-changing | (delete) |
+| Avoid | Use instead | Example |
+|---|---|---|
+| seamless, seamlessly | Delete, or state what happens | "Orders flow seamlessly into the ERP." becomes "Approved orders are sent to the ERP." |
+| robust, powerful, cutting-edge, state-of-the-art, best-in-class | Delete, or state the measurable property | "A robust search." becomes "Users should be able to search by name, number and date." |
+| intuitive, user-friendly, easy to use | Describe the behaviour | "An intuitive form." becomes "The form shows mandatory fields first and marks them with an asterisk." |
+| leverage, utilise | use | "Leverage the existing user list." becomes "Use the existing user list." |
+| empower, enable (as a vague verb) | allow, or name the action | "Enables managers to oversee leave." becomes "Managers should be able to view the leave of their team." |
+| streamline, optimise (without a measure) | State the change | "Streamlines approval." becomes "Approval requires one action by the approver." |
+| comprehensive, holistic, end-to-end (as decoration) | State what is covered | "A comprehensive audit trail." becomes "The application should record who changed a record, what changed and when." |
+| enhance, improve (without a measure) | State the change | "Improves visibility." becomes "The dashboard should show open requests by status." |
+| ensure (overused) | make sure, or state the rule | "Ensure data accuracy." becomes "The application should reject a date earlier than today." |
+| in order to | to | "In order to approve, open the request." becomes "To approve, open the request." |
+| it is important to note that, please note | Delete | "Please note that exports are limited." becomes "Exports are limited to 5,000 rows." |
+| furthermore, moreover, additionally, in addition | Start a new bullet, or use "and" or "also" | "Additionally, users can filter by date." becomes "Users can also filter by date." |
+| various, several, numerous | The number, or the list | "Several file types." becomes "PDF, DOCX and JPG files." |
+| as needed, as appropriate, if required, where applicable | State the condition | "Reminders are sent as needed." becomes "A reminder is sent two days before the due date." If the condition is not known, it is an assumption with a decision. |
+| etc., and so on | List the items, or say "the following" | "Name, email, etc." becomes "Name, email and phone number." |
+| intelligent, smart, magic, AI-powered (as a selling word) | Describe what it does | "Smart routing." becomes "Cases are assigned to the team that matches the case category." |
+| delve, landscape, journey, ecosystem, game-changing | Delete | "Across the digital landscape." becomes "Across the connected systems." or delete. |
+| handle, manage, support (as a vague verb) | Name the action | "Handles refunds." becomes "Users should be able to record a refund against an invoice." |
 
 If the project itself is about AI, the word "AI" is allowed as a product term, for example "AI classification". It is not allowed as praise.
 
@@ -111,7 +112,7 @@ If the project itself is about AI, the word "AI" is allowed as a product term, f
 
 ## Self-edit checklist
 - [ ] Every bullet has one behaviour and about 25 words or fewer.
-- [ ] No word from the avoid list.
+- [ ] No flagged word from the avoid list, unless it is the exact word.
 - [ ] "should" is used for behaviour. No mixed modal verbs.
 - [ ] No "etc." or "as needed".
 - [ ] Every value is a stated number, or it is an assumption with a query.

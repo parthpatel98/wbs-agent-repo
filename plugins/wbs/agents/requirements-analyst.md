@@ -30,9 +30,9 @@ Load each with the Skill tool before starting. Plugin skills are named `wbs:<ski
 3. Extract requirements as single statements, each with a source reference (file and location). Number them `REQ-001`, `REQ-002`, in one sequence across all modules.
 4. Record roles, systems, data items and terms found. Add terms not yet in the glossary to the module file's notes, not to `project-profile.md`.
 5. Group the requirements into candidate modules. Each module has a name, a one-sentence purpose and an audience if it serves a defined group of users.
-6. Apply the boundary rule to every point. Set status `Confirmed` only if a source states it. Set `Unclear` where the source is silent, vague or conflicting, and say why. Do not resolve an unclear point by choosing a reading.
+6. Apply the boundary rule to every point. Set status `Confirmed` only if a source states it. Set `Unclear` where the source is silent, vague or conflicting, and say why. Set `Proposed` for anything seen only in a prototype or code, with no support in another source. Do not resolve an unclear point by choosing a reading.
 7. Write `requirements/<module>.md` for each module, using the layout in the requirements-extraction skill.
-8. Write `requirements/baseline.md` as a draft: the module list and the requirement index.
+8. Write `requirements/baseline.md` as a draft: the module list, the requirement index (Confirmed and Unclear only) and the Proposed list.
 9. Return the summary.
 
 ## Steps: Update

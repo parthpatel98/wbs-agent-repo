@@ -33,13 +33,13 @@ Mark as `Unclear` and say why. Typical signs:
 - Screens with no data source.
 - Missing validation, missing error handling, no permission check.
 
-A feature that exists only as a screen with no behaviour is recorded as `Unclear`: screen present, behaviour not defined.
+A feature that exists only as a screen with no behaviour is recorded as `Proposed` with the note "screen present, behaviour not defined".
 
 ## What not to do
 - Do not treat implementation details as requirements (library choice, folder structure, variable names) unless the brief names them.
 - Do not treat a default or a hard-coded value as a confirmed business rule. Record it as the prototype value and mark it `Unclear`.
 - Do not copy secrets, keys or passwords into any file. Record only that an integration exists and the system it uses.
-- Do not assume code that is present is in scope. It is a candidate, to be confirmed.
+- Do not assume code that is present is in scope. A function found only in code, with no support in the brief, documents or notes, is recorded with status `Proposed`. It stays out of the baseline until the user accepts it.
 
 ## Recording
 Write each finding as a requirement in the module file (see requirements-extraction). Use the source form `file:line-range` or `file, screen name`. Put screens and flows in the Screens and flows section. Type `Rule` for validation and status logic, `Data` for entities and fields.

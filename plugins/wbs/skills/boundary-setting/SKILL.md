@@ -21,7 +21,8 @@ This is the control that keeps the scope clear. Nothing unclear or unconfirmed i
 | **Assumption** | Not confirmed. A reasonable default is built into this phase unless the client says otherwise. | `Assumptions:` block. Also Queries for Client if the client must confirm. |
 | **Parked** | Useful or implied, but not part of this phase | `Assumptions:` block, as "Parked for next phase", and the Parked list |
 | **Exclusion** | Out of scope and not planned | `Assumptions:` block, as "X is not included" |
-| **Question** | Unclear, and the answer changes the scope materially | Asked to the user before the point is drafted |
+| **Question (Pending decision)** | Unclear, and the answer changes the scope or sets a business rule | Asked to the user. Until decided it is not written as a requirement, an assumption or an exclusion. A line `[PENDING AS-nnn: <short point>]` marks the place in the cell. |
+| **Left to development team** | A technical implementation detail inside an accepted requirement, with no effect on what users see, what is kept, or what the client must live with | Not written in the cell. Logged in the register as Tier C. |
 
 Assumption means included on a stated basis. Parked means not included now, but a candidate for later. Exclusion means not included and not planned.
 
@@ -29,12 +30,12 @@ Assumption means included on a stated basis. Parked means not included now, but 
 Apply these steps in sequence to every point:
 
 1. **Is it confirmed?** Find a source: a requirement ID, the knowledge bank, or a user answer. If yes, it is a **requirement**.
-2. **Does the answer materially change the scope?** It does if it adds or removes a feature, a role, an integration, a data migration, or a different way of working for users. If yes, it is a **question** for the user. Do not draft the point until answered, or, if the user chooses to proceed, treat it as parked. The Writer cannot ask the user. Until the answer comes, it writes the narrower reading in the Assumptions block, as an exclusion or a parked item (for example "Delegation of approvals is not included."), so the cell is never silent about the point. It also lists the question in its return summary, and the Orchestrator asks the user. When the user answers, the Writer updates the cell in Apply mode.
-3. **Is there a sensible default that fits this phase?** If yes, it is an **assumption**. If the client must confirm it, add a Queries for Client entry.
-4. **Is the point valuable or implied, but outside this phase?** If yes, it is **parked**. Add the Parked list entry.
-5. **Otherwise**, if it is clearly not wanted or not related, it is an **exclusion**.
+2. **Does the answer materially change the scope or set a business rule?** It does if it adds or removes a feature, a role, an integration, a data migration or a way of working for users, if it narrows an accepted requirement, or if it fixes a rule the sources do not state. If yes, it is a **question** (Tier A). Record it in the Decisions table with status Pending decision. Do not draft it, and do not write it as an assumption or an exclusion. Put a `[PENDING AS-nnn: <short point>]` line in the cell. The Writer cannot ask the user. It records the point, and the Orchestrator asks the user. After the decision, the Writer updates the cell in Apply mode and removes the line.
+3. **Is there a sensible default that fits this phase, and does it add no scope and remove none?** If yes, it is an **assumption** (Tier B). If the client must confirm it, add a Queries for Client entry.
+4. **Is the point valuable, but not asked for by any accepted requirement, and outside this phase?** If yes, it is **parked**. Add the Parked list entry. If an accepted requirement implies the point, parking it narrows the requirement. Go back to step 2.
+5. **Otherwise**, if it is clearly not wanted or not related, and no accepted requirement asks for it, it is an **exclusion**.
 
-If two classes seem to fit, choose the one that gives the narrower scope.
+If two classes seem to fit, treat the point as a question. Do not choose the narrower or the wider reading yourself.
 
 ## Wording
 
@@ -43,7 +44,7 @@ Each point is one bullet in the `Assumptions:` block. Write plain statements in 
 - **Assumption:** state the basis. "The password policy is provided by the client."
 - **Assumption with a default:** "Reset links expire after 24 hours unless the client specifies a different period."
 - **Parked:** start with "Parked for next phase:". "Parked for next phase: reset by SMS."
-- **Exclusion:** "Export to Excel is not included."
+- **Exclusion:** "Export to Excel is not included." Only for something that no accepted requirement asks for, or that the user has decided to exclude.
 - **Dependency on another party:** "The Opter integration supports Create and Update only. Retrieving orders is not available."
 
 Rules for wording:
@@ -65,6 +66,8 @@ Rules for wording:
 
 **In the cell:** the `Assumptions:` block, as above.
 
+**In `requirements/register.md`, Decisions table:** every assumption, exclusion, parked item and question has one row, with the columns shown in the register template: ID (`AS-001`, in one sequence), point, source or reason, feature, tier, agent recommendation, user decision, resulting treatment, status (Pending decision or Decided) and date. A point is not resolved because it appears in an Assumptions block or a Queries for Client entry. It is resolved when its row is Decided.
+
 **In `requirements/register.md`, Parked list:**
 
 | ID | Point | Feature ID | Reason | Suggested phase | Status |
@@ -73,10 +76,41 @@ Rules for wording:
 
 - IDs run in sequence (`PK-001`, `PK-002`) and are never reused.
 - Status: Parked, Accepted into scope, Dropped.
-- The user reviews the Parked list at the cross-module check.
+- The user reviews the Parked list at the cross-module check. Every Parked list entry has a Decisions row.
 - If a parked item is accepted into scope, the Writer moves it to a requirement in the feature and updates the register.
 
 **In the blueprint (section 7):** a module-level summary of what is in scope, assumed, parked and excluded, with references to the register.
+
+## Tiers and the decision register
+Every point that is not a confirmed requirement gets a tier. The tier decides how the user sees it.
+
+The test that separates A from B: **would a wrong default change what is built?** If the answer is yes, the point is Tier A. If a wrong default could be fixed by editing a rule or a value inside a feature that is already planned, it is Tier B.
+
+| Tier | Which points | How the user sees it | Status before the decision |
+|---|---|---|---|
+| A | Changes what is built: adds or removes a feature, a role, an integration or a platform, changes what data is kept, narrows an accepted requirement, comes only from a prototype, or is a requirement with status Unclear or Proposed | Needs the user's answer. Presented with options and a recommendation. | Pending decision |
+| B | Fills a gap inside a planned feature with a recommended default: a rule, a limit, a value, a display choice, a parked item or an exclusion for something no accepted requirement asks for | Listed in one compact table with the recommended treatment. The user accepts the whole group with one action, or flags items. | Proposed default |
+| C | A technical detail inside an accepted requirement, with no effect on what users see, what is kept, or what the client must live with | Not shown for decision. Logged. | Logged |
+
+After the user decides, the status is Decided and the resulting treatment is filled: In scope, Assumed, Parked (with the PK ID), Excluded, Dropped, or Left to development team.
+
+Rules:
+- Between A and B, apply the test above. Do not move a point to A only because it is a business rule. A default rule inside a planned feature, such as "requests with a start date in the past are rejected", is Tier B.
+- Group related points. One point per decision, not one per feature. For example, all questions about who can do what are one point, owned by the roles feature.
+- Quality over count. Do not list a point that no feature needs. Do not list obvious technical detail as Tier C. List a Tier C point only if you would otherwise have written it in the cell.
+- More than about ten Tier A points in one module usually means the tiering is too strict. Re-check each against the test and group related ones before returning.
+- Parked or excluded items: if no accepted requirement asks for the point, it is Tier B with the recommended treatment Parked or Excluded. If an accepted requirement implies it, the treatment would narrow the requirement, so it is Tier A.
+- The Parked list entry and its PK ID are created when the row is Decided as Parked, by the Writer. The scan does not create Parked entries.
+- The user may apply an earlier decision to a type of point. The Orchestrator records it in the register under Precedents. Later points of the same type are decided by precedent and reported in the review summary.
+- A point found late (by a reviewer or the Writer, after the first scan) becomes a Decisions row with status Pending decision if it is Tier A, or Proposed default if it is Tier B. A Tier A behaviour is not drafted until the user decides. Late points are raised at the next module review, not as a separate interruption.
+- A requirement in the baseline with status Unclear or Proposed is a Tier A point. It is not drafted until decided.
+
+## No implied authority
+- **No business rule from technical convention.** Do not justify a business rule because it is standard practice. Examples: automatic retries, duplicate suppression, permanent rejection, retention periods, conflict-resolution rules. If it is internal mechanics inside an accepted requirement, it is Tier C and is not presented as client-approved. If it affects what users see, what is kept or what the client must live with, it is Tier A or B.
+- **No promotion from prototype.** Functionality seen only in a prototype has requirement status `Proposed`. It stays out of the baseline and the WBS until the user accepts it.
+- **No authority from reviewers.** A reviewer may name a missing behaviour and give options. A reviewer cannot tell the Writer to choose a business rule. The comment status is `Needs decision`, not `Resolved`, until the user decides.
+- **No silent exclusion.** Do not remove or narrow an accepted requirement by writing an assumption or an exclusion. Example: "Reopening a rejected request is not included" is a scope decision if the accepted requirements do not set that boundary. It is a Tier A point.
+- **No silent default.** Every assumption has a Decisions row. A default that the user has not accepted has status Proposed default and is listed for acceptance. It is not final until the row is Decided.
 
 ## Where unclear points usually hide
 Check every feature for these. If the source is silent, classify the point.
@@ -101,14 +135,17 @@ Check every feature for these. If the source is silent, classify the point.
 Reviewers check each feature for:
 1. No unclear point is written as a fact. Watch for "automatically", "all", "any", "always", "supports" with no source.
 2. No scope is implied that was not confirmed. Watch for words such as "including", "such as" and lists that go beyond the baseline.
-3. Every parked item appears in the Parked list with its source feature and reason.
+3. Every parked item appears in the Parked list with its source feature and reason, and has a Decisions row.
 4. Every assumption that needs the client has a Queries for Client entry, and every query has an assumption.
 5. Exclusions do not conflict with other features.
 6. The `Assumptions:` block states exclusions, not only assumptions.
 7. A feature with no assumptions has a stated reason.
+8. Every assumption in a cell has a Decisions row, and the row is Decided when the module is approved. No `[PENDING` line remains at approval.
+9. No assumption or exclusion narrows an accepted requirement.
+10. No technical convention is written as a business rule. No prototype-only function is written as scope.
 
 Comment severity:
-- **Must fix:** an unclear point is written as a fact, scope is implied without a source, or a parked item is missing from the Parked list.
+- **Must fix:** an unclear point is written as a fact, scope is implied without a source, a parked item is missing from the Parked list, an assumption has no Decisions row, an accepted requirement is narrowed, a technical convention is written as a business rule, or a prototype-only function is written as scope.
 - **Should fix:** a query is missing or too vague, or the wording is not specific.
 
 ## Worked cases
@@ -131,7 +168,7 @@ Comment severity:
 
 **Case 4: the brief says "reports" with no detail.**
 - Question to the user: which reports and in which form. This changes scope.
-- If the user cannot answer now: "Parked for next phase: reports." and an exclusion "Export of reports to a file is not included."
+- If the user cannot answer now: the user decides to park it. Then "Parked for next phase: reports." and an exclusion "Export of reports to a file is not included." Until then the point is Pending decision.
 
 **Case 5: a feature has no unclear points.**
 - It still states what is excluded, for example "Printing is not included." If nothing applies, the review notes why there is no Assumptions content.

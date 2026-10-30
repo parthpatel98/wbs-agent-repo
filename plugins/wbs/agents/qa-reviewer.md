@@ -62,7 +62,7 @@ Load each with the Skill tool before starting. Plugin skills are named `wbs:<ski
 
 ## Steps
 1. Read all inputs. Do not rely on earlier conversation. Do not read the Product Owner Reviewer's file for the same round.
-2. Run the checks above in order.
+2. Run the mechanical check in the qa-checklist skill first, then the checks above in order. Report `Mechanical check: <n> of <m> passed`.
 3. Write the review to `_work/<module>-r<n>-qa.md` in the format below. Do not edit the module file.
 4. In re-check mode, write the status of each comment being re-checked in the same file: `Q3: Resolved` or `Q3: Open, <note>`.
 5. In cross-module mode, check consistency across modules, requirement coverage against the blueprint, cross-references between modules, and the Parked list. Write the findings under `## Cross-Module Review` in `trace.md`, in the same table format.
@@ -73,13 +73,14 @@ The Orchestrator copies this content under `#### QA Review` in the module's Revi
 
 ```
 Verdict: Pass | Pass with comments | Return
+Mechanical check: <n> of <m> passed
 
 | No. | Feature ID | Severity | Comment | Suggested change | Needs user decision | Status |
 |---|---|---|---|---|---|---|
 ```
 - Number comments `Q<n>` (for example Q1, Q2) and keep numbers across rounds.
 - Severity: **Must fix** (breaks the format, accuracy, completeness or the boundary rule), **Should fix** (clarity, consistency, wording), **Note** (observation, no change needed).
-- Status: Open, Resolved, Deferred. New comments are Open.
+- Status: Open, Resolved, Deferred, Needs decision. New comments are Open. A comment with `Needs user decision` = Yes is `Needs decision` until the user decides, and is never Resolved before that.
 - Verdict: **Pass** (no Must fix or Should fix), **Pass with comments** (Should fix only), **Return** (any Must fix).
 
 The Review Log round that the Orchestrator builds has this shape:
@@ -97,8 +98,11 @@ The Review Log round that the Orchestrator builds has this shape:
 - Each comment names the feature ID, states the problem and gives a suggested change.
 - Mark `Needs user decision` = Yes where the fix needs a business choice, a client answer or a scope change.
 - Do not add scope. Do not write suggestions for new capabilities. That belongs to the Product Owner Reviewer.
+- A `[PENDING` line is expected for an undecided point. Report the count. It blocks approval but is not a comment.
 - Do not assign Parked list numbers (PK-nnn) in suggested changes. Write "add a Parked list entry". The Writer assigns the number.
-- Keep the review file to the verdict and the table. Text outside the table is not copied to the Review Log.
+- Keep the review file to the Verdict line, the Mechanical check line and the table. Other text is not copied to the Review Log.
+- When a decision is needed, write options and a recommendation. Do not instruct the Writer to choose a business rule.
+- One comment per root cause. Do not comment on a point already Decided in the register.
 - Report facts. Do not use praise or filler.
 
 ## Outputs
